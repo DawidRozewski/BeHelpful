@@ -9,4 +9,5 @@ public interface DonationService {
     long getAllBags();
     long getDonationsQuantity();
     List<Donation> findAll();
+    void save(Donation donation);
 }

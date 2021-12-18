@@ -23,14 +23,14 @@
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
             <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#" class="btn btn--without-border">Przekaż dary</a></li>
+            <li><a href="/form" class="btn btn--without-border">Przekaż dary</a></li>
             <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
 
     <div class="slogan container container--90">
         <h2>
-            Dziękujemy za przesłanie formularza Na maila prześlemy wszelkie
+            Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie
             informacje o odbiorze.
         </h2>
     </div>

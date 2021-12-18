@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.DonationRepository;
-
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ public class DonationServiceImpl implements DonationService {
 
         return donations.stream()
                 .map(Donation::getQuantity)
-                .count();
+                .reduce(0, Integer::sum);
     }
 
     @Override
@@ -32,5 +31,10 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public List<Donation> findAll() {
         return donationRepository.findAll();
+    }
+
+    @Override
+    public void save(Donation donation) {
+     donationRepository.save(donation);
     }
 }
