@@ -1,11 +1,14 @@
 package pl.coderslab.charity.entity;
 
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -13,7 +16,6 @@ public class User {
     Long id;
 
     @Email
-    @UniqueElements
     private String email;
 
     private String password;
