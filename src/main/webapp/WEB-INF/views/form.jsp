@@ -218,7 +218,7 @@
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
+                                <span class="summary--text" id="summaryBags"
                                 >Dla fundacji "Mam marzenie" w Warszawie</span
                                 >
                             </li>
