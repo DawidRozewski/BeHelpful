@@ -10,7 +10,7 @@ import javax.validation.constraints.Email;
 @Entity
 @Getter
 @Setter
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,9 @@ public class User {
 
     @Transient
     private String repassword;
+
+    private final String ROLE = "ROLE_USER";
+
 
 
 

@@ -4,7 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="parts/header.jsp"%>
-
+<head>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
 <body>
 <header>
     <nav class="container container--70">
@@ -26,17 +32,17 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <form:form modelAttribute="user">
+    <form:form modelAttribute="appUser">
         <div class="form-group">
-            <form:input type="email" path="email" placeholder="Email" />
+            <form:input type="email" path="email" placeholder="Email" /><br/>
             <form:errors path="email" cssClass="error"/>
         </div>
         <div class="form-group">
-            <form:input type="password" path="password" placeholder="Hasło" />
+            <form:input type="password" path="password" placeholder="Hasło" /><br/>
             <form:errors path="password" cssClass="error"/>
         </div>
         <div class="form-group">
-            <form:input type="password" path="repassword" placeholder="Powtórz hasło" />
+            <form:input type="password" path="repassword" placeholder="Powtórz hasło" /><br/>
             <form:errors path="repassword" cssClass="error"/>
         </div>
 
