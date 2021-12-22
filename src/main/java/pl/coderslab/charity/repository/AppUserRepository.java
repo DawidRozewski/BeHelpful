@@ -8,4 +8,7 @@ import pl.coderslab.charity.entity.AppUser;
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     AppUser findByEmail(String email);
+
+    AppUser findByVerificationToken(String token);
+
 }

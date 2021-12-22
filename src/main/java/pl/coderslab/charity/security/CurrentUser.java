@@ -28,12 +28,18 @@ public class CurrentUser implements UserDetailsService {
 
     private UserDetails getUserDetails(String email) {
         AppUser appUser = appUserRepository.findByEmail(email);
-        if(appUser != null) {
+        if(appUser != null && appUser.isEnabled()) {
             GrantedAuthority currentUser = new SimpleGrantedAuthority(appUser.getROLE());
-            return new User(appUser.getEmail(), appUser.getPassword(), Collections.singleton(currentUser));
+            return new org.springframework.security.core.userdetails.User(
+                    appUser.getEmail(),
+                    appUser.getPassword(),
+                    Collections.singleton(currentUser));
         }
 
         throw new UsernameNotFoundException(email);
     }
+
+
+
 
 }

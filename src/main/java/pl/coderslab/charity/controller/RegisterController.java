@@ -1,47 +1,45 @@
 package pl.coderslab.charity.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.entity.AppUser;
-import pl.coderslab.charity.repository.AppUserRepository;
-import pl.coderslab.charity.service.AppUserServiceImpl;
+import pl.coderslab.charity.service.AppUserService;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/register")
 public class RegisterController {
 
-    private final AppUserServiceImpl appUserService;
+    private final AppUserService appUserService;
 
-    @GetMapping()
-    public String prepForm(Model model){
+    @GetMapping("/register")
+    public String prepForm(Model model) {
         model.addAttribute("appUser", new AppUser());
         return "register";
     }
 
-    @PostMapping
-    public String save(@ModelAttribute("appUser") @Valid AppUser appUser, BindingResult result) {
-        if(!checkPassword(appUser.getPassword(), appUser.getRepassword())) {
-            result.rejectValue("repassword", "error.user", "Podane hasła nie są zgodne.");
-            return "/register";
-        }
-        if(result.hasErrors()) {
+    @PostMapping("/register")
+    public String save(@ModelAttribute("appUser") @Valid AppUser appUser, BindingResult result) throws MessagingException, UnsupportedEncodingException {
+        appUserService.checkPasswords(appUser, result);
+        if (result.hasErrors()) {
             return "register";
         }
         appUserService.save(appUser);
-        return "redirect:/login";
+
+        return "register-confirmation";
     }
 
-    private boolean checkPassword(String password, String repassword) {
-        return password.equals(repassword);
+
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        return appUserService.getViewAfterVerification(code);
     }
 
 

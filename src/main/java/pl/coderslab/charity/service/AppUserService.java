@@ -1,10 +1,15 @@
 package pl.coderslab.charity.service;
 
+import org.springframework.validation.BindingResult;
 import pl.coderslab.charity.entity.AppUser;
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 public interface AppUserService {
 
-    AppUser getByEmail(String email);
-    void save(AppUser appUser);
-
+    void save(AppUser appUser) throws MessagingException, UnsupportedEncodingException;
+    boolean verify(String verificationToken);
+    String getViewAfterVerification(String code);
+    String checkPasswords(AppUser appUser, BindingResult result);
 }

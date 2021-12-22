@@ -6,6 +6,7 @@ import pl.coderslab.charity.validator.UniqueEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
@@ -20,10 +21,16 @@ public class AppUser {
     @UniqueEmail
     private String email;
 
+    @NotBlank
     private String password;
 
     @Transient
+    @NotBlank
     private String repassword;
+
+    private String verificationToken;
+
+    private boolean enabled;
 
     private final String ROLE = "ROLE_USER";
 

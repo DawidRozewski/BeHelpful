@@ -2,7 +2,6 @@ package pl.coderslab.charity.validator;
 
 import lombok.AllArgsConstructor;
 import pl.coderslab.charity.repository.AppUserRepository;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
