@@ -27,7 +27,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String save(@ModelAttribute("appUser") @Valid AppUser appUser, BindingResult result) throws MessagingException, UnsupportedEncodingException {
-        appUserService.checkPasswords(appUser, result);
+        appUserService.comparePasswords(appUser, result);
         if (result.hasErrors()) {
             return "register";
         }

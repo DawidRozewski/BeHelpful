@@ -87,15 +87,15 @@
                 <h3>Zaznacz co chcesz oddać:</h3>
 
                 <c:forEach var="c" items="${categories}">
-                <div class="form-group form-group--checkbox">
+                <div class="form-group form-group--checkbox"  >
                     <label>
-                        <input
+                        <input  id="category"
                                 type="checkbox"
                                 name="categories"
                                 value=${c.id}
                         />
                         <span class="checkbox"></span>
-                        <span class="description" id="category"
+                        <span class="description"
                         >${c.name}</span
                         >
                     </label>
@@ -211,8 +211,8 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
+                                <span class="summary--text" id="givenBags"
+                                ></span
                                 >
                             </li>
 

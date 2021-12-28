@@ -1,8 +1,10 @@
 package pl.coderslab.charity.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import pl.coderslab.charity.entity.AppUser;
 import pl.coderslab.charity.repository.AppUserRepository;
@@ -18,6 +20,7 @@ public class AppUserServiceImpl implements AppUserService {
     private final EmailService emailService;
 
     @Override
+    @Async
     public void save(AppUser appUser) {
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         String token = UUID.randomUUID().toString();
@@ -27,6 +30,15 @@ public class AppUserServiceImpl implements AppUserService {
         appUserRepository.save(appUser);
         emailService.sendVerificationEmail(appUser);
 
+    }
+
+    @Override
+    public String getViewAfterVerification(String token) {
+        if (verify(token)) {
+            return "verify-success";
+        } else {
+            return "verify-fail";
+        }
     }
 
     @Override
@@ -43,15 +55,7 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public String getViewAfterVerification(String code) {
-        if (verify(code)) {
-            return "verify-success";
-        } else {
-            return "verify-fail";
-        }
-    }
-
-    public String checkPasswords(AppUser appUser, BindingResult result) {
+    public String comparePasswords(AppUser appUser, BindingResult result) {
         if(!checkPassword(appUser.getPassword(), appUser.getRepassword())) {
             result.rejectValue("repassword", "error.user", "Podane hasła nie są zgodne.");
             return "/register";

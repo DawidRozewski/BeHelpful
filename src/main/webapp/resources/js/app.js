@@ -164,7 +164,15 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
-
+      const bagsQuantity = document.getElementById("bags");
+      const givenBags = document.getElementById("givenBags");
+      // givenBags.innerHTML = bagsQuantity.value;
+      const categories = document.getElementById("category");
+      for(let i=0; i < categories.length; i++){
+        if(categories[i].checked === true) {
+          givenBags.innerHTML = categories[i].value;
+        }
+      }
 
     }
 

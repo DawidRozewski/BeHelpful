@@ -11,5 +11,5 @@ public interface AppUserService {
     void save(AppUser appUser) throws MessagingException, UnsupportedEncodingException;
     boolean verify(String verificationToken);
     String getViewAfterVerification(String code);
-    String checkPasswords(AppUser appUser, BindingResult result);
+    String comparePasswords(AppUser appUser, BindingResult result);
 }

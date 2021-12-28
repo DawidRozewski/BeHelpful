@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -25,6 +26,9 @@ public class Donation {
 
     @ManyToOne
     Institution institution;
+
+    @ManyToOne
+    AppUser appUser;
 
     String street;
 

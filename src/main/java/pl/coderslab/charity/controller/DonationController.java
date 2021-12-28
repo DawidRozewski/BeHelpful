@@ -12,7 +12,9 @@ import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.DonationService;
-import pl.coderslab.charity.service.DonationServiceImpl;
+import pl.coderslab.charity.service.EmailService;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/form")
@@ -22,6 +24,7 @@ public class DonationController {
     private final CategoryRepository categoryRepository;
     private final InstitutionRepository institutionRepository;
     private final DonationService donationService;
+    private final EmailService emailService;
 
     @GetMapping
      public String prepForm(Model model) {
@@ -33,8 +36,9 @@ public class DonationController {
     }
 
     @PostMapping
-     public String form(@ModelAttribute("donation") Donation donation) {
+     public String form(@ModelAttribute("donation") Donation donation, Principal principal) {
         donationService.save(donation);
+        emailService.sendDonationEmail(donation, principal);
          return "form-confirmation";
 
     }
