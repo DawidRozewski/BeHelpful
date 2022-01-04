@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import pl.coderslab.charity.repository.InstitutionRepository;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.EmailService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -36,7 +38,10 @@ public class DonationController {
     }
 
     @PostMapping
-     public String form(@ModelAttribute("donation") Donation donation, Principal principal) {
+     public String form(@ModelAttribute("donation") @Valid Donation donation, BindingResult result, Principal principal) {
+        if(result.hasErrors()){
+            return "form";
+        }
         donationService.save(donation);
         emailService.sendDonationEmail(donation, principal);
          return "form-confirmation";

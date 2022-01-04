@@ -163,20 +163,60 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
-      // TODO: get data from inputs and show them in summary
-      const bagsQuantity = document.getElementById("bags");
-      const givenBags = document.getElementById("givenBags");
-      // givenBags.innerHTML = bagsQuantity.value;
-      const categories = document.getElementById("category");
-      for(let i=0; i < categories.length; i++){
-        if(categories[i].checked === true) {
-          givenBags.innerHTML = categories[i].value;
+      const street = document.getElementById("street");
+      const givenStreet = document.getElementById("givenStreet")
+      givenStreet.innerText = street.value;
+
+      const city = document.getElementById("city");
+      const givenCity = document.getElementById("givenCity");
+       givenCity.innerText = city.value
+
+      const zipCode = document.getElementById("zipCode");
+      const givenZipCode = document.getElementById("givenZipCode");
+      givenZipCode.innerText = zipCode.value;
+
+      const phoneNumber = document.getElementById("phoneNumber");
+      const givenPhoneNumber = document.getElementById("givenPhoneNumber");
+      givenPhoneNumber.innerText = phoneNumber.value;
+
+      const date = document.getElementById("date");
+      const givenDate = document.getElementById("givenDate")
+      givenDate.innerText = date.value;
+
+      const time = document.getElementById("time");
+      const givenTime = document.getElementById("givenTime")
+      givenTime.innerText = time.value;
+
+      const comment = document.getElementById("comment");
+      const givenComment = document.getElementById("givenComment")
+      givenComment.innerText = comment.value;
+
+      const institution = document.getElementsByName("institution");
+      let institutionValue;
+      for(let i = 0; i < institution.length; i++) {
+        if(institution[i].checked) {
+          institutionValue = institution[i].value;
         }
       }
+      const givenInstitution = document.getElementById("givenInstitution");
+      givenInstitution.innerText = institutionValue;
+
+
+      const bagsQuantity = document.getElementById("bags");
+      const givenBags = document.getElementById("givenBags");
+
+      const categories = document.getElementsByName("categories");
+      let categoryValue;
+      for(let i = 0; i < categories.length; i++) {
+        if(categories[i].checked) {
+          categoryValue = categories[i].value;
+        }
+      }
+      givenBags.innerText = bagsQuantity.value + " worki " + categoryValue;
 
     }
-
   }
+
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);

@@ -81,7 +81,7 @@
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
             <!-- STEP 1: class .active is switching steps -->
-        <form:form modelAttribute="donation">
+        <form:form modelAttribute="donation" id="test">
 
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -92,7 +92,8 @@
                         <input  id="category"
                                 type="checkbox"
                                 name="categories"
-                                value=${c.id}
+                                value=${c.name}
+                                hidden="${c.id}"
                         />
                         <span class="checkbox"></span>
                         <span class="description"
@@ -131,11 +132,11 @@
                 <c:forEach var="i" items="${institutions}">
                 <div class="form-group form-group--checkbox">
                     <label>
-                        <input type="radio" name="institution" value="${i.id}" />
+                        <input type="radio" name="institution" value="${i.name}" hidden="${i.id}"/>
                         <span class="checkbox radio"></span>
                         <span class="description">
                   <div class="title">${i.name}</div>
-                  <div class="subtitle" id="institution">
+                  <div class="subtitle">
                     ${i.description}
                   </div>
                 </span>
@@ -190,7 +191,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea path="pickUpComment" rows="5" id="comment"></form:textarea>
+                                <form:textarea path="pickUpComment" rows="5" id="comment"/>
                             </label>
                         </div>
                     </div>
@@ -218,8 +219,8 @@
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text" id="summaryBags"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                <span class="summary--text" id="givenInstitution"
+                                ></span
                                 >
                             </li>
                         </ul>
@@ -229,19 +230,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="givenStreet"></li>
+                                <li id="givenCity"></li>
+                                <li id="givenZipCode"></li>
+                                <li id="givenPhoneNumber"></li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="givenDate"></li>
+                                <li id="givenTime"></li>
+                                <li id="givenComment"></li>
                             </ul>
                         </div>
                     </div>
