@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import pl.coderslab.charity.security.CurrentUser;
+import pl.coderslab.charity.security.UrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -20,13 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/form", "/dashboard").hasRole("USER")
                 .and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .successHandler(myAuthenticationSuccessHandler())
                 .and().logout()
                 .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID");
         http.csrf().disable();
     }
-
 
     @Bean
     public CurrentUser currentUser() {
@@ -37,6 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new UrlAuthenticationSuccessHandler();
+    }
+
 
 
 
