@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import pl.coderslab.charity.entity.AppUser;
 import pl.coderslab.charity.repository.AppUserRepository;
@@ -61,6 +60,12 @@ public class AppUserServiceImpl implements AppUserService {
             return "/register";
         }
         return null;
+    }
+
+
+    @Override
+    public AppUser findByEmail(String email) {
+        return appUserRepository.findByEmail(email);
     }
 
     private boolean checkPassword(String password, String repassword) {

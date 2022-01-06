@@ -34,6 +34,14 @@
     <h2>Załóż konto</h2>
     <form:form modelAttribute="appUser">
         <div class="form-group">
+            <form:input type="text" path="firstName" placeholder="Imię" /><br/>
+            <form:errors path="firstName" cssClass="error"/>
+        </div>
+        <div class="form-group">
+            <form:input type="text" path="lastName" placeholder="Nazwisko" /><br/>
+            <form:errors path="lastName" cssClass="error"/>
+        </div>
+        <div class="form-group">
             <form:input type="email" path="email" placeholder="Email" /><br/>
             <form:errors path="email" cssClass="error"/>
         </div>

@@ -51,13 +51,14 @@ public class EmailServiceImpl implements EmailService {
     public void sendDonationEmail(Donation donation, Principal principal) {
         String toAddress = principal.getName();
         String subject = "[Be Helpful] Pickup details";
-        String content = "<h3> Below you will find information on the details of receiving the package: </h3> <br>"
+        String content = "<h3> Below you will find information on the details of receiving the package:  </h3> <br>"
                 + "<strong> Pick up date: </strong> DATE <br>"
                 + "<strong> Pick up time: </strong> TIME <br>"
                 + "<strong> Quantity baqs: </strong> QUANTITY <br>"
                 + "<strong> Street: </strong> STREET <br>"
                 + "<strong> Zip Code: </strong> ZIP_CODE <br>"
                 + "<strong> Phone number: </strong>  PHONE_NUMBER <br><br>"
+                + "<strong> Comment: </strong>  COMMENT <br><br>"
                 + "Thank you for the gifts,<br>"
                 + "Be Helpful, Charity Company";
         try {
@@ -72,6 +73,7 @@ public class EmailServiceImpl implements EmailService {
             content = content.replace("STREET", donation.getStreet());
             content = content.replace("ZIP_CODE", donation.getZipCode());
             content = content.replace("PHONE_NUMBER", donation.getPhoneNumber());
+            content = content.replace("COMMENT", donation.getPickUpComment());
 
             helper.setText(content, true);
             mailSender.send(message);

@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.entity.AppUser;
 import pl.coderslab.charity.entity.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+import pl.coderslab.charity.service.AppUserService;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.EmailService;
 
@@ -27,6 +29,7 @@ public class DonationController {
     private final InstitutionRepository institutionRepository;
     private final DonationService donationService;
     private final EmailService emailService;
+    private final AppUserService appUserService;
 
     @GetMapping
      public String prepForm(Model model) {
@@ -38,17 +41,12 @@ public class DonationController {
     }
 
     @PostMapping
-     public String form(@ModelAttribute("donation") @Valid Donation donation, BindingResult result, Principal principal) {
-        if(result.hasErrors()){
-            return "form";
-        }
-        donationService.save(donation);
+     public String form(@ModelAttribute("donation") Donation donation, Principal principal) {
+        donationService.save(donation, principal);
         emailService.sendDonationEmail(donation, principal);
          return "form-confirmation";
 
     }
-
-
 
 
 }

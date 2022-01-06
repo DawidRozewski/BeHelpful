@@ -12,4 +12,6 @@ public interface AppUserService {
     boolean verify(String verificationToken);
     String getViewAfterVerification(String code);
     String comparePasswords(AppUser appUser, BindingResult result);
+    AppUser findByEmail(String email);
+
 }

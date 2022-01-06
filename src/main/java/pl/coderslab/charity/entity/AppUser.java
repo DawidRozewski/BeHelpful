@@ -9,6 +9,7 @@ import pl.coderslab.charity.validator.UniqueEmail;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,7 +23,11 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @UniqueEmail
+    String firstName;
+
+    String lastName;
+
+//    @UniqueEmail
     @Email
     private String email;
 
