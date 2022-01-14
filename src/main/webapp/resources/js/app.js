@@ -214,21 +214,36 @@ document.addEventListener("DOMContentLoaded", function () {
             givenInstitution.innerText = institutionValue;
 
 
-            const bagsQuantity = document.getElementById("bags");
-            const givenBags = document.getElementById("givenBags");
-
             const categories = document.getElementsByName("categories");
-            let categoryValue;
+            let categoriesName = " ";
             for (let i = 0; i < categories.length; i++) {
                 if (categories[i].checked) {
-                    categoryValue = categories[i].value;
+                    if (categories[i].value == 1) {
+                        categoriesName += "ubrania, które nadają się do ponownego użycia | ";
+                    }
+                    if (categories[i].value == 2) {
+                        categoriesName += "ubrania, do wyrzucenia | ";
+                    }
+                    if (categories[i].value == 3) {
+                        categoriesName += "zabawki | ";
+                    }
+                    if (categories[i].value == 4) {
+                        categoriesName += "książki | ";
+                    }
+                    if (categories[i].value == 5) {
+                        categoriesName += "inne | ";
+                    }
                 }
             }
-            if (bagsQuantity.value == 1) {
-                givenBags.innerText = bagsQuantity.value + " worek ";
-            } else {
-                givenBags.innerText = bagsQuantity.value + " worki ";
-            }
+            const bagsQuantity = document.getElementById("bags");
+            const givenBags = document.getElementById("givenBags");
+             givenBags.innerText = bagsQuantity.value + " worki ";
+
+            let categoriesNameNoLastCharacter = categoriesName.slice(0, -2);
+            const givenCategories = document.getElementById("givenCategories");
+            givenCategories.innerText = "Kategorie: " + categoriesNameNoLastCharacter;
+
+
         }
     }
 

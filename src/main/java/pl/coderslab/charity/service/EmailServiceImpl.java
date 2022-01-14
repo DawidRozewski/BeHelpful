@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import pl.coderslab.charity.entity.AppUser;
 import pl.coderslab.charity.entity.Donation;
-import pl.coderslab.charity.repository.AppUserRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

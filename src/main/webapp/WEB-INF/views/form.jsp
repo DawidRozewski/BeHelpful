@@ -12,8 +12,8 @@
             <li class="logged-appUser">
                 Witaj Dawid
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="/">Profil</a></li>
+                    <li><a href="/dashboard">Moje zbiórki</a></li>
                     <li><a href="/logout">Wyloguj</a></li>
                 </ul>
             </li>
@@ -89,15 +89,12 @@
             <c:forEach items="${categories}" var="c">
                 <div class="form-group form-group--checkbox">
                     <label>
-                        <form:checkbox path="categories" name="categories" value="${c.id}"/>
+                        <input type="checkbox" name="categories" value="${c.id}" id="categoryName"/>
                         <span class="checkbox"></span>
-                        <span class="description"
-                        >${c.name}</span
-                        >
+                        <span class="description" id="name" >${c.name}</span>
                     </label>
                 </div>
             </c:forEach>
-
 
             <div class="form-group form-group--buttons">
                 <button type="button" class="btn next-step">Dalej</button>
@@ -210,6 +207,11 @@
                             <span class="icon icon-bag"></span>
                             <span class="summary--text" id="givenBags"
                             ></span
+                            >
+                        </li>
+                        <li>
+                            <span class="summary--text" id="givenCategories"
+                            >Kategorie: </span
                             >
                         </li>
 
